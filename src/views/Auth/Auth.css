@@ -1,0 +1,18 @@
+input{
+  display: block;
+}
+#form{
+  display: block;
+  width: 20%;
+  min-width: 300px;
+}
+#auth-options{
+  display: flex;
+  width: 20%;
+  min-width: 300px;
+
+}
+.option{
+  flex: 1;
+  cursor: pointer;
+}

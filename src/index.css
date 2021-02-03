@@ -1,0 +1,140 @@
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  --color-primary: #061f57;
+  --color-success: #117e32;
+  --color-danger: #ca211b;
+}
+.text-center {
+  text-align: center !important;
+}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#form {
+  width: 50%;
+  display: grid;
+  padding: 1rem;
+  min-width: 300px;
+  border-radius: 10px;
+  grid-template-areas:
+    'title title'
+    'data-details data'
+    'actions actions';
+}
+input {
+  display: block;
+  width: 95%;
+  margin: 1rem auto;
+  padding: 0.8rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--color-primary);
+  background: inherit;
+  font-family: monospace;
+  letter-spacing: 1px;
+}
+#title {
+  padding: 0.5rem;
+  color: var(--color-primary);
+  text-align: center;
+  border-radius: 5px;
+  grid-area: title;
+}
+#data-details {
+  grid-area: data-details;
+}
+#data {
+  grid-area: data;
+}
+#actions {
+  grid-area: actions;
+  display: flex;
+  justify-content: center;
+}
+.data-col {
+  margin: 0 1rem;
+}
+.data-col > h4 {
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+button {
+  padding: 0.5rem;
+  cursor: pointer;
+  display: block;
+  margin: 1rem auto;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-primary);
+  width: 30%;
+  color: white;
+}
+button:hover {
+  filter: brightness(70%);
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.row > label {
+  flex: 40%;
+  display: block;
+  text-transform: uppercase;
+  color: #444;
+  font-size: 0.8rem;
+}
+.row > p {
+  flex: 55%;
+  letter-spacing: 2px;
+  font-family: monospace;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid #444;
+  color: #222;
+}
+#res > h2 {
+  padding: 0.5rem;
+  color: var(--color-primary);
+  border-radius: 5px;
+}
+#res {
+  /* display: none; */
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  width: 25%;
+  min-width: 300px;
+}
+footer {
+  text-align: center;
+  color: whitesmoke;
+  background: var(--color-primary);
+  padding: 1rem;
+  margin-top: 1rem;
+  bottom: 0;
+}
+@media (max-width: 600px) {
+  #form,
+  #res {
+    width: 80%;
+    box-shadow: none;
+    border: none;
+  }
+  .row {
+    display: block;
+  }
+}
