@@ -1,8 +1,8 @@
-.message{
-  width:fit-content;
-  padding:.5rem;
-  margin:1rem auto;
+.message {
+  width: fit-content;
+  padding: 0.5rem;
+  margin: 1rem auto;
   border-radius: 3px;
-  border: 1px solid var(--color-primary);
+  color: orangered;
   text-align: center;
 }

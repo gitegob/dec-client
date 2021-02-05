@@ -1,18 +1,17 @@
-input{
-  display: block;
-}
-#form{
+#logupForm {
   display: block;
   width: 20%;
   min-width: 300px;
 }
-#auth-options{
+#logupForm > input {
+  display: block;
+}
+#auth-options {
   display: flex;
   width: 20%;
   min-width: 300px;
-
 }
-.option{
+.option {
   flex: 1;
   cursor: pointer;
 }

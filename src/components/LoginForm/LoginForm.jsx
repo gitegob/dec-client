@@ -1,50 +1,60 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { API_URL } from '../../env';
-import { logUp } from '../../lib/auth';
-import { pusher } from '../../lib/utils';
+import { AuthState } from '../../state/auth/AuthState';
+import { pusher } from '../../utils';
 import Message from '../Message/Message';
 
 const LoginForm = () => {
-
-  const [state, setstate] = useState({username:'',password:'',loading:"false",error:""})
+  const [state, setstate] = useState({ username: '', password: '', loading: false, error: '' });
+  const [pwdShow, setpwdShow] = useState(false);
+  const { login } = useContext(AuthState);
   const history = useHistory();
-  const handleSubmit=(e)=>{
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setstate({ ...state, error: '', loading: true });
-    logUp(state, `${API_URL}/auth/login`)
-      .then((res) => {
-        if (res.status !== 200) {
-          setstate({ ...state, error: res.error, loading: false });
-          setTimeout(() => { setstate({ ...state, error: '' }); }, 3000);
-        } else {
-          localStorage.setItem('accessToken', res.data.token);
-          setstate({ ...state, loading: false });
-          pusher(history, '/');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setstate({ ...state, error: 'Error connecting to server, please try again.', loading: false });
-        setTimeout(() => { setstate({ ...state, error: '' }); }, 3000);
-      });
-  
-  }
+    const { error, token } = await login({ username: state.username, password: state.password });
+    setstate({ ...state, loading: false });
+    if (error) {
+      setstate({ ...state, loading: false, error: error });
+      setTimeout(() => {
+        setstate({ ...state, error: '' });
+      }, 2000);
+    } else {
+      localStorage.setItem('accessToken', token);
+      pusher(history, '/');
+    }
+  };
   return (
-    <form id="form" onSubmit={handleSubmit}>
+    <form id="logupForm" onSubmit={handleSubmit}>
       <h2 id="title">Log in</h2>
-        <input type="text" placeholder="Username" name="username" id="username" 
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        id="username"
         value={state.username}
-        onChange={(e)=>setstate({...state,username:e.target.value})}/>
-        <input type="password" placeholder="Password" name="password" id="password"
+        onChange={(e) => setstate({ ...state, username: e.target.value })}
+      />
+      <input
+        type={pwdShow ? 'text' : 'password'}
+        placeholder="Password"
+        name="password"
+        id="password"
         value={state.password}
-        onChange={(e)=>setstate({...state,password:e.target.value})}/>
+        onChange={(e) => setstate({ ...state, password: e.target.value })}
+      />
+      <button type="button" onClick={() => setpwdShow(!pwdShow)}>
+        {pwdShow ? 'Hide password' : 'Show Password'}
+      </button>
       <div id="actions">
-        <button type="submit" id="submitbtn">Login</button>
+        <button type="submit" id="submitbtn">
+          {state.loading ? 'Wait...' : 'Login'}
+        </button>
       </div>
-      {state.error&&<Message message={state.error}/>}
+      {state.error && <Message message={state.error} />}
     </form>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

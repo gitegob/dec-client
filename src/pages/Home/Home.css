@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#headeruserrole,
+#headerusername > span {
+  text-transform: uppercase;
+}
+#headeruserrole {
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.employee {
+  box-shadow: 0 0 10px dodgerblue;
+}
+.admin {
+  box-shadow: 0 0 10px orangered;
+}
+.manager {
+  box-shadow: 0 0 10px green;
+}
+#headerusername {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#headerusername > button {
+  width: fit-content;
+  margin: 0 1rem;
+}

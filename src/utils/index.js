@@ -4,9 +4,9 @@ export const pusher = (history, path) => {
   else history.push(path);
 };
 
-export const fetcher = async (endPoint, config) => {
+export const fetcher = async (url, config) => {
   try {
-    const data = await fetch(endPoint, config);
+    const data = await fetch(url, config);
     const res = data.json();
     return res;
   } catch (error) {
