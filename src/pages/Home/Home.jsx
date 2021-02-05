@@ -6,11 +6,13 @@ import Loader from '../../components/Loader/Loader';
 import Results from '../../components/Results/Results';
 import { AuthState } from '../../state/auth/AuthState';
 import { EntriesState } from '../../state/entries/EntriesState';
+import AddUser from '../../components/AddUser/AddUser';
 
 const Home = () => {
   const { resultsVisible } = useContext(EntriesState);
   const { userData, logout, getUserData } = useContext(AuthState);
   const [loading, setloading] = useState(true);
+  const [panel, setpanel] = useState({ employee: false, manager: false });
   const tkn = localStorage.getItem('accessToken');
   useEffect(() => {
     const handleGetUserData = async () => {
@@ -21,6 +23,13 @@ const Home = () => {
   }, []);
   const handleLogout = () => {
     logout();
+  };
+
+  const showPanelManager = () => {
+    setpanel({ ...panel, employee: false, manager: true });
+  };
+  const showPanelEmployee = () => {
+    setpanel({ ...panel, manager: false, employee: true });
   };
   return (
     <>
@@ -35,13 +44,35 @@ const Home = () => {
               <span>
                 <b>{userData?.username || 'Username'}</b>
               </span>{' '}
+              {(userData.role === 'admin' || userData.role === 'manager') && (
+                <button type="button" id="logoutbtn" onClick={showPanelEmployee}>
+                  Add Employee
+                </button>
+              )}
+              {userData.role === 'admin' && (
+                <button type="button" id="logoutbtn" onClick={showPanelManager}>
+                  Add Manager
+                </button>
+              )}
               <button type="button" id="logoutbtn" onClick={handleLogout}>
                 Log Out
               </button>
             </div>
           </header>
-          <DataEntryForm />
-          {resultsVisible && <Results />}
+          {panel.employee && <AddUser employee />}
+          {panel.manager && <AddUser manager />}
+          {(panel.manager || panel.employee) && (
+            <div id="cancelpanel">
+              <div>
+                <button type="button" onClick={() => setpanel({ ...panel, employee: false, manager: false })}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+          {!panel.employee && !panel.manager && <DataEntryForm />}
+          {}
+          {resultsVisible && !panel.employee && !panel.manager && <Results />}
         </>
       )}
     </>

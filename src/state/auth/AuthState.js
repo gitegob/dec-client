@@ -48,8 +48,35 @@ export const AuthProvider = ({ children }) => {
         Authorization: `Bearer ${token}`,
       },
     });
+    if ([401, 403].indexOf(res.status) > -1) return logout();
     if (res.status !== 200) return { auth: false };
     return { auth: true };
+  };
+
+  const addEmployee = async (body, token) => {
+    const res = await fetcher(`${env.API_URL}/auth/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ...body, role: 'employee' })
+    });
+    if (res.status !== 201) return { error: res.error };
+    return { success: res.message };
+  };
+
+  const addManager = async (body, token) => {
+    const res = await fetcher(`${env.API_URL}/auth/managers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ...body, role: 'manager' })
+    });
+    if (res.status !== 201) return { error: res.error };
+    return { success: res.message };
   };
 
   const logout = () => {
@@ -67,7 +94,9 @@ export const AuthProvider = ({ children }) => {
         authenticate,
         login,
         logout,
-        getUserData
+        getUserData,
+        addEmployee,
+        addManager
       }}
     >
       {children}

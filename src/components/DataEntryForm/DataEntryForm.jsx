@@ -58,7 +58,7 @@ const DataEntryForm = () => {
   return (
     <form id="form" onSubmit={handleSubmit}>
       <h2 id="title">DATA ENTRY CALCULATOR</h2>
-      {error && <Message message={error} />}
+      {error && <Message message={error} error={true} />}
       <div className="data-col" id="data-details">
         <h4 className="text-center">Customer Info</h4>
         <input type="text" placeholder="Customer Reference Number" name="customerrefno" id="customerrefno" onChange={(e) => handleChange(e)} />

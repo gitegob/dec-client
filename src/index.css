@@ -9,6 +9,9 @@ html {
   --color-success: #117e32;
   --color-danger: #ca211b;
 }
+[disabled] {
+  filter: grayscale(100%);
+}
 .text-center {
   text-align: center !important;
 }
@@ -78,6 +81,7 @@ button {
   border: none;
   border-radius: 5px;
   background-color: var(--color-primary);
+  min-width: fit-content !important;
   width: 30%;
   color: white;
 }

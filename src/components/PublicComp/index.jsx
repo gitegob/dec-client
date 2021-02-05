@@ -1,13 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-const Private = (WrappedComp) =>
+const PublicComp = (WrappedComp) =>
   class extends React.Component {
     render() {
       const tkn = localStorage.getItem('accessToken');
       const rest = this.props;
-      return tkn ? <WrappedComp {...rest} /> : <Redirect to="/auth" />;
+      return !tkn ? <WrappedComp {...rest} /> : <Redirect to="/" />;
     }
   };
 
-export default Private;
+export default PublicComp;

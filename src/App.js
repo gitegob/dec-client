@@ -3,8 +3,8 @@ import Home from './pages/Home/Home';
 import Auth from './pages/Auth/Auth';
 import { AuthProvider } from './state/auth/AuthState';
 import { EntriesProvider } from './state/entries/EntriesState';
-import Private from './components/Private/Private';
-import Public from './components/Public/Public';
+import PrivateComp from './components/PrivateComp';
+import PublicComp from './components/PublicComp';
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
       <EntriesProvider>
         <div className="container">
           <Switch>
-            <Route path="/" exact component={Private(Home)} />
-            <Route path="/auth" exact component={Public(Auth)} />
+            <Route path="/" exact component={PrivateComp(Home)} />
+            <Route path="/auth" exact component={PublicComp(Auth)} />
             <Route
               path="*"
               component={() => (

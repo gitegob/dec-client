@@ -65,7 +65,7 @@ const Results = () => {
       <button type="button" id="close" onClick={handleClose}>
         Close
       </button>
-      {error && <Message message={error} />}
+      {error && <Message message={error} error={true} />}
     </div>
   );
 };

@@ -48,11 +48,11 @@ const LoginForm = () => {
         {pwdShow ? 'Hide password' : 'Show Password'}
       </button>
       <div id="actions">
-        <button type="submit" id="submitbtn">
+        <button type="submit" id="submitbtn" disabled={state.loading}>
           {state.loading ? 'Wait...' : 'Login'}
         </button>
       </div>
-      {state.error && <Message message={state.error} />}
+      {state.error && <Message message={state.error} error={true} />}
     </form>
   );
 };

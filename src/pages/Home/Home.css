@@ -30,3 +30,11 @@
   width: fit-content;
   margin: 0 1rem;
 }
+#cancelpanel {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+#cancelpanel button {
+  padding: 0.5rem 2rem;
+}
