@@ -27,26 +27,31 @@ const LoginForm = () => {
   };
   return (
     <form id="logupForm" onSubmit={handleSubmit}>
-      <h2 id="title">Log in</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        name="username"
-        id="username"
-        value={state.username}
-        onChange={(e) => setstate({ ...state, username: e.target.value })}
-      />
-      <input
-        type={pwdShow ? 'text' : 'password'}
-        placeholder="Password"
-        name="password"
-        id="password"
-        value={state.password}
-        onChange={(e) => setstate({ ...state, password: e.target.value })}
-      />
-      <button type="button" onClick={() => setpwdShow(!pwdShow)}>
-        {pwdShow ? 'Hide password' : 'Show Password'}
-      </button>
+      <h3 id="title">Log in</h3>
+      <div className="input-wrapper">
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          id="username"
+          value={state.username}
+          onChange={(e) => setstate({ ...state, username: e.target.value })}
+        />
+      </div>
+      <div className="input-wrapper">
+        <input
+          type={pwdShow ? 'text' : 'password'}
+          placeholder="Password"
+          id="password"
+          name="password"
+          value={state.password}
+          onChange={(e) => setstate({ ...state, password: e.target.value })}
+        />
+        <button type="button" id="showhide" onClick={() => setpwdShow(!pwdShow)}>
+          {pwdShow ? 'HIDE' : 'SHOW'}
+        </button>
+      </div>
+
       <div id="actions">
         <button type="submit" id="submitbtn" disabled={state.loading}>
           {state.loading ? 'Wait...' : 'Login'}

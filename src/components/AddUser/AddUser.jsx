@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 // import './AddUser.css';
 import { AuthState } from '../../state/auth/AuthState';
-import { validateUser } from '../../utils';
+import { validator } from '../../utils';
 import Message from '../Message/Message';
 
 const AddUser = ({ manager, employee }) => {
@@ -16,9 +16,8 @@ const AddUser = ({ manager, employee }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setstate({ ...state, error: '', success: '', loading: true });
-    const { valid, error: userError } = validateUser({ username: state.username, password: state.password });
-
-    if (valid) {
+    const userError = validator({ username: state.username, password: state.password }, 'addUserSchema');
+    if (!userError) {
       const { error, noAuth, success } = await adduserWrapper(
         { username: state.username, password: state.password },
         localStorage.getItem('accessToken'),
@@ -46,25 +45,29 @@ const AddUser = ({ manager, employee }) => {
   return (
     <form id="logupForm" onSubmit={handleSubmit}>
       <h2 id="title">{employee ? 'Add Employee' : 'Add Manager'}</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        name="username"
-        id="username"
-        value={state.username}
-        onChange={(e) => setstate({ ...state, username: e.target.value })}
-      />
-      <input
-        type={pwdShow ? 'text' : 'password'}
-        placeholder="Password"
-        name="password"
-        id="password"
-        value={state.password}
-        onChange={(e) => setstate({ ...state, password: e.target.value })}
-      />
-      <button type="button" onClick={() => setpwdShow(!pwdShow)}>
-        {pwdShow ? 'Hide password' : 'Show Password'}
-      </button>
+      <div className="input-wrapper">
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          id="username"
+          value={state.username}
+          onChange={(e) => setstate({ ...state, username: e.target.value })}
+        />
+      </div>
+      <div className="input-wrapper">
+        <input
+          type={pwdShow ? 'text' : 'password'}
+          placeholder="Password"
+          id="password"
+          name="password"
+          value={state.password}
+          onChange={(e) => setstate({ ...state, password: e.target.value })}
+        />
+        <button type="button" id="showhide" onClick={() => setpwdShow(!pwdShow)}>
+          {pwdShow ? 'HIDE' : 'SHOW'}
+        </button>
+      </div>
       <div id="actions">
         <button type="submit" id="submitbtn" disabled={state.loading}>
           {state.loading ? 'Wait...' : 'Add'}

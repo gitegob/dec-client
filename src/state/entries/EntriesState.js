@@ -1,5 +1,4 @@
 import React, { useReducer, createContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { env } from '../../config';
 import { fetcher } from '../../utils';
 import { EntriesReducer } from './EntriesReducer';

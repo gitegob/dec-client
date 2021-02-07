@@ -5,7 +5,7 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 const Auth = () => {
   return (
     <>
-      <h2 id="title">WELCOME TO DATA ENTRY CALCULATOR</h2>
+      <div id="title">WELCOME TO DECALC</div>
 
       <LoginForm />
     </>

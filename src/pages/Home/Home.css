@@ -1,17 +1,51 @@
 .header {
   width: 100%;
+}
+.upper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.upper-header > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-#headeruserrole,
-#headerusername > span {
+#logoutbtn {
+  background: none;
+  color: #061f57;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+  border-radius: 0;
+}
+#logoutbtn:hover {
+  background-color: floralwhite;
+}
+.lower-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-user-btn {
+  display: inline;
+  margin: 0 1rem;
+  width: fit-content;
+}
+#header-userrole {
   text-transform: uppercase;
 }
-#headeruserrole {
+.upper-header span {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+#header-userrole {
   padding: 0.5rem;
   border-radius: 5px;
 }
+
 .employee {
   box-shadow: 0 0 10px dodgerblue;
 }
@@ -21,20 +55,11 @@
 .manager {
   box-shadow: 0 0 10px green;
 }
-#headerusername {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-#headerusername > button {
-  width: fit-content;
-  margin: 0 1rem;
-}
 #cancelpanel {
   width: 50%;
   display: flex;
   justify-content: center;
 }
 #cancelpanel button {
-  padding: 0.5rem 2rem;
+  padding: 1rem 1.5rem;
 }
